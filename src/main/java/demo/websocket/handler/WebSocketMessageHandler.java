@@ -11,14 +11,14 @@ public class WebSocketMessageHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        System.out.println("Connected to WebSocket Server");
+        System.out.println(String.format("Connected to WebSocket Server. Session=%s Addfress=%s", session.getId(), session.getRemoteAddress()));
     }
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
         System.out.println("Received: " + message.getPayload());
         try {
-            TextMessage outputMessage = new TextMessage("Send Reply: " + message.getPayload());
+            TextMessage outputMessage = new TextMessage(String.format("[%s] Reply: %s", session.getId(), message.getPayload()));
             session.sendMessage(outputMessage);
         } catch (IOException e) {
             e.printStackTrace();
@@ -27,6 +27,6 @@ public class WebSocketMessageHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        System.out.println("Disconnected from WebSocket Server");
+        System.out.println(String.format("Disconnected from WebSocket Server. Session=%s", session.getId()));
     }
 }

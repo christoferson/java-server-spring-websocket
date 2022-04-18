@@ -14,7 +14,7 @@ import demo.websocket.handler.WebSocketMessageHandler;
 public class WebSocketConfig implements WebSocketConfigurer {
 
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(messageHandler(), "/test");
+		registry.addHandler(messageHandler(), "/demo");
 	}
 
 	@Bean
